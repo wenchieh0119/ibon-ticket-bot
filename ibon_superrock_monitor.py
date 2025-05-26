@@ -58,4 +58,10 @@ def check_super_rock():
             print("⚠️ 找不到超級搖滾區", flush=True)
 
     except Exception as e:
-        print(f"⚠️ 發生錯誤：{e
+        print(f"⚠️ 發生錯誤：{e}", flush=True)
+
+if __name__ == "__main__":
+    print("🟢 開始監控 7/5 超級搖滾區...", flush=True)
+    while True:
+        check_super_rock()
+        time.sleep(60)
