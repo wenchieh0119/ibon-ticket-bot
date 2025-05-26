@@ -4,6 +4,7 @@ import time
 
 print("✅ 檔案載入成功", flush=True)
 
+# === 設定區 ===
 WEBHOOK_URL = "https://discord.com/api/webhooks/1376151705615335535/gmAhBrPLFy2eRcM8fh6tAYRugMOQkPzJ837SjNY-NAGMppnIJdsPq_Fv7GgFlWC86wRA"
 PERFORMANCE_ID = "B08T20ZV"
 EVENT_ID = "B08SCWCO"
@@ -13,12 +14,14 @@ HEADERS = {
     "Content-Type": "application/json",
     "User-Agent": "Mozilla/5.0"
 }
+# =============
 
 def check_super_rock():
     try:
         payload = {
             "Performance_Id": PERFORMANCE_ID
         }
+
         print("🔁 呼叫 API...", flush=True)
         response = requests.post(API_URL, headers=HEADERS, data=json.dumps(payload))
         print(f"🔧 回應狀態碼：{response.status_code}", flush=True)
@@ -39,11 +42,12 @@ def check_super_rock():
         for area in areas:
             if area["PerformancesPriceAreas_Name"] == "超級搖滾區":
                 status = "✅ 有票" if area["Sold_Out"] == 0 else "❌ 售完"
-                print(f"[{time.strftime('%H:%M:%S')}] 超級搖滾區狀態：{status}", flush=True)
+                remaining = area.get("Discount_Limit", "?")
+                print(f"[{time.strftime('%H:%M:%S')}] 超級搖滾區狀態：{status}，剩餘：{remaining} 張", flush=True)
 
                 if area["Sold_Out"] == 0:
                     message = {
-                        "content": f"🎟️ 超級搖滾區有票啦！快搶 👉 https://ticket.ibon.com.tw/Event/{EVENT_ID}/{PERFORMANCE_ID}"
+                        "content": f"🎟️ 超級搖滾區有票啦！目前剩下 {remaining} 張！快搶 👉 https://ticket.ibon.com.tw/Event/{EVENT_ID}/{PERFORMANCE_ID}"
                     }
                     requests.post(WEBHOOK_URL, json=message)
                 break
