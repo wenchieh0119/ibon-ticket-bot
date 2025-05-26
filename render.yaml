@@ -1,0 +1,7 @@
+services:
+  - type: worker
+    name: ibon-ticket-bot
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: "python ibon_superrock_monitor.py"
