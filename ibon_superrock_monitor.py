@@ -14,14 +14,13 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0"
 }
 
-PAYLOAD = {
-    "Performance_Id": PERFORMANCE_ID
-}
-
 def check_super_rock():
     try:
+        payload = {
+            "Performance_Id": PERFORMANCE_ID
+        }
         print("🔁 呼叫 API...", flush=True)
-        response = requests.post(API_URL, headers=HEADERS, data=json.dumps(PAYLOAD))
+        response = requests.post(API_URL, headers=HEADERS, data=json.dumps(payload))
         print(f"🔧 回應狀態碼：{response.status_code}", flush=True)
 
         if response.status_code != 200:
@@ -32,8 +31,8 @@ def check_super_rock():
         item = data.get("Item")
 
         if not item:
-            print("⚠️ API 回傳無 Item 欄位", flush=True)
-            print(data, flush=True)
+            print("⚠️ API 回傳無 Item 欄位，回傳內容如下：", flush=True)
+            print(json.dumps(data, indent=2, ensure_ascii=False), flush=True)
             return
 
         areas = item.get("Areas_Info", [])
@@ -49,7 +48,7 @@ def check_super_rock():
                     requests.post(WEBHOOK_URL, json=message)
                 break
         else:
-            print("⚠️ 沒有找到超級搖滾區", flush=True)
+            print("⚠️ 找不到超級搖滾區", flush=True)
 
     except Exception as e:
         print(f"⚠️ 發生錯誤：{e}", flush=True)
