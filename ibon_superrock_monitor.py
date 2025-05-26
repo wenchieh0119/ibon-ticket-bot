@@ -41,8 +41,9 @@ def check_super_rock():
     except Exception as e:
         print(f"⚠️ 發生錯誤：{e}")
 
-# 每 60 秒執行一次
-print("🟢 開始監控超級搖滾區...")
-while True:
-    check_super_rock()
-    time.sleep(60)
+# 🔧 正確入口點：讓 Render 知道要執行這段
+if __name__ == "__main__":
+    print("🟢 開始監控超級搖滾區...")
+    while True:
+        check_super_rock()
+        time.sleep(60)
