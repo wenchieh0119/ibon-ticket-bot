@@ -5,10 +5,10 @@ import time
 print("✅ 檔案載入成功", flush=True)
 
 # === 設定區 ===
-WEBHOOK_URL = "https://discord.com/api/webhooks/1376151705615335535/gmAhBrPLFy2eRcM8fh6tAYRugMOQkPzJ837SjNY-NAGMppnIJdsPq_Fv7GgFlWC86wRA"
+WEBHOOK_URL = ""
 PERFORMANCE_ID = "B08T20ZV"  # 🎯 7/5 場次
 EVENT_ID = "B08SCWCO"
-API_URL = "https://ticketapi.ibon.com.tw/api/Event/GetAreasInfo"
+API_URL = ""
 HEADERS = {
     "Content-Type": "application/json",
     "User-Agent": "Mozilla/5.0"
